@@ -16,7 +16,8 @@ public class UserJdbcDao implements UserDao{
 
     public boolean addUser(User user) {
         if (!userExist(user)) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users (email, name, surname, password, birthday) VALUES(?, ?, ?, ?, ?)")) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users" +
+                    "(email, name, surname, password, birthday) VALUES(?, ?, ?, ?, ?)")) {
                 preparedStatement.setString(1, user.getEmail());
                 preparedStatement.setString(2, user.getName());
                 preparedStatement.setString(3, user.getSurname());
@@ -81,7 +82,8 @@ public class UserJdbcDao implements UserDao{
     }
 
     public void updateUser(User updateUser) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE users SET email = ?, name = ?, surname = ?, password = ?, birthday = ? WHERE id = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE users" +
+                "SET email = ?, name = ?, surname = ?, password = ?, birthday = ? WHERE id = ?")) {
             preparedStatement.setString(1, updateUser.getEmail());
             preparedStatement.setString(2, updateUser.getName());
             preparedStatement.setString(3, updateUser.getSurname());
